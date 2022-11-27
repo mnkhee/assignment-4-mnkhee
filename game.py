@@ -14,26 +14,27 @@ def make_board(rows, columns):
 
     for row in range(rows):
         for column in range(columns):
-            board[(row, column)] = ["Empty Room"]
+            board[(row, column)] = ["Field Tepsia"]
 
-    board[(3, 3)] = ['Enemy']
+    board[(0, 0)] = ["Enemy", "Stowry Village"]
+    board[(2, 3)] = ["Lake Tepsia"]
+    board[(5, 3)] = ["Lord Drakon's Castle'"]
     return board
 
 
 def make_character(character):
     character = input('Input your name: \n')
-    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Current_HP': 5, 'Max_HP': 120, 'Class': ''}
+    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Current_HP': 34, 'Max_HP': 34, 'Class': 'Basic'}
 
     def character_class():
         sub_class_choice = ''
-        print('''\nIn the vast world of ____, there are 5 warrior professions, each excelling in different categories.
-           Swordsman: Guarantees high damage output, but at a cost
-           Assassin: With their sneaky antics, they will often get the first hit before the enemy knows it
-           Mage: Masters of magic, rely on mana to cast elementals
-           Ranger: Medium damage output but a higher chance of critical hits. High resistance to magic wielders
-           Tank: High defence, can sponge a lot of hits before going down\n''')
+        print('''\nIn the vast world of Tepsia, there are 3 warrior professions, each excelling in different categories.
+        Swordsman: Guarantees high damage output, but at a cost.
+        Mage: Masters of magic, rely on mana to cast elementals.
+        Tank: High defence, can sponge a lot of hits before going down
+        \n''')
         while True:
-            main_class = ['Swordsman', 'Assassin', 'Mage', 'Ranger', 'Tank']
+            main_class = ['Swordsman', 'Mage', 'Tank']
             for i in enumerate(main_class):
                 print(i)
             class_options = input('\nChoose a profession: \n').title()
@@ -42,15 +43,9 @@ def make_character(character):
                 class_choice = 'Swordsman'
                 break
             elif class_options == '1':
-                class_choice = 'Assassin'
-                break
-            elif class_options == '2':
                 class_choice = 'Mage'
                 break
-            elif class_options == '3':
-                class_choice = 'Ranger'
-                break
-            elif class_options == '4':
+            elif class_options == '2':
                 class_choice = 'Tank'
                 break
             else:
@@ -61,36 +56,25 @@ def make_character(character):
 
         if class_options == '0':
             print('''\nThere are two types of swordsmen, each providing their pros and cons
-               Samurai: Dances around the battle field with their swift movement, striking their opponents down with a katana. [High damage, high speed, low defence]
-               Berserker: An immovable object meets an unstoppable force to form a warrior who stops at nothing to strike the enemy down. [High damage, high defence, low speed]\n''')
+              Samurai: Dances around the battle field with their swift movement, striking their opponents down with a katana. [High damage, high speed, low defence].
+              Berserker: An immovable object meets an unstoppable force to form a warrior who stops at nothing to strike the enemy down. [High damage, high defence, low speed].\n''')
             while True:
-                sub_class_options = input('Choose a subclass: \n Samurai \n Berserker \n').title()
-                if sub_class_options == 'Samurai':
+                sword_sub = ['Samurai', 'Berserker']
+                for i in enumerate(sword_sub):
+                    print(i)
+                sub_class_options = input('Choose a subclass: \n 0: Samurai \n 1: Berserker \n').title()
+                if sub_class_options == '0':
                     sub_class_choice = 'Samurai'
                     break
-                elif sub_class_options == 'Berserker':
+                elif sub_class_options == '1':
                     sub_class_choice = 'Berserker'
                     break
                 else:
                     print('Invalid sub class!')
         elif class_options == '1':
-            print('''\nThere are two types of Assassins, each having their own ways of sneak attacks
-               Ninja: Very intelligent and strike when the time is right. Will deal 30 percentage damage on the enemy on impact, leaving them weaker before they can strike. [Medium damage, high speed, low defence]
-               Shadow Striker: Fights from the shadows. Pops out of the enemy's shadow and deals 45 percentage damage on impactm leaving them weaker before they can strike. [Low damage, low speed, medium defence]\n''')
-            while True:
-                sub_class_options = input('Choose a subclass: \n Ninja \n Shadow Striker \n').title()
-                if sub_class_options == 'Ninja':
-                    sub_class_choice = 'Ninja'
-                    break
-                elif sub_class_options == 'Shadow Striker':
-                    sub_class_choice = 'Shadow Striker'
-                    break
-                else:
-                    print('Invalid sub class!')
-        elif class_options == '2':
             print('''\nThere are two types of mages, each casting their own unique elementals
-               Sorcerer: Specializes in sorcery, witchcraft and black magic. Can inflict daze and confuse on the enemy, lowering their attack and defence. [High damage, medium speed, low defence, high mana consumption]
-               Elementalist: Utilizes the four elementals to inflict damage on their foes. [Medium damage, medium speed, medium defence, medium mana consumption]\n''')
+                Sorcerer: Specializes in sorcery, witchcraft and black magic. Can inflict daze and confuse on the enemy, lowering their attack and defence. [High damage, medium speed, low defence, high mana consumption].
+                Elementalist: Utilizes the four elementals to inflict damage on their foes. [Medium damage, medium speed, medium defence, medium mana consumption].\n''')
             while True:
                 mage_sub = ['Sorcerer', 'Elementalist']
                 for i in enumerate(mage_sub):
@@ -104,23 +88,9 @@ def make_character(character):
                     break
                 else:
                     print('Invalid sub class!')
-        elif class_options == '3':
-            print('''\nThere are two types of rangers, each attacking their enemies at a distance with different styles
-               Gunner: Masters at weaponry. Has 2 attack cycles in the beginning of a fight, higher chance at critical hits. [High damage, low speed, medium defence]
-               Archer: Specializes at the bow. Has the option to skip attack. Every attack skipped increases damage percentage by 10%, but leaves the player vulnerable. [Scalable damage, low speed, low defence]\n''')
-            while True:
-                sub_class_options = input('Choose a subclass: \n Gunner \n Archer \n').title()
-                if sub_class_options == 'Gunner':
-                    sub_class_choice = 'Gunner'
-                    break
-                elif sub_class_options == 'Archer':
-                    sub_class_choice = 'Archer'
-                    break
-                else:
-                    print('Invalid sub class!')
-        elif class_options == '4':
+        elif class_options == '2':
             print('''\nThere is only one Tank type
-               Paladin: The only tank type. Never afraid of a fight with their high hp, and armour to tank all the hits. [Low damage, Very low speed, very high defence]\n''')
+                Paladin: The only tank type. Never afraid of a fight with their high hp, and armour to tank all the hits. [Low damage, Very low speed, very high defence].\n''')
             while True:
                 sub_class_options = input('Choose a subclass: \n Paladin \n').title()
                 if sub_class_options == 'Paladin':
@@ -132,19 +102,58 @@ def make_character(character):
         print('Great! you have finished character customization!')
         print('Class:', class_choice, '\nSub Class:', sub_class_choice)
         return [class_choice, sub_class_choice]
+
     player_class = character_class()
     player_info['Class'] = player_class[1]
-    print(player_info)
     return player_info
 
 
+def player_stats(character):
+
+    if character['Class'] == 'Basic':
+        character['Attack'] = 14
+        character['Defence'] = 14
+    elif character['Class'] == 'Samurai':
+        character['Current_HP'] = 24
+        character['Max_HP'] = 24
+        character['Attack'] = 27
+        character['Defence'] = 12
+    elif character['Class'] == 'Berserker':
+        character['Current_HP'] = 29
+        character['Max_HP'] = 29
+        character['Attack'] = 19
+        character['Defence'] = 18
+    elif character['Class'] == 'Sorcerer':
+        character['Current_HP'] = 20
+        character['Max_HP'] = 20
+        character['Attack'] = 32
+        character['Defence'] = 11
+        character['Mana'] = 75
+    elif character['Class'] == 'Elementalist':
+        character['Current_HP'] = 26
+        character['Max_HP'] = 26
+        character['Attack'] = 22
+        character['Defence'] = 13
+        character['Mana'] = 109
+    elif character['Class'] == 'Paladin':
+        character['Current_HP'] = 36
+        character['Max_HP'] = 36
+        character['Attack'] = 16
+        character['Defence'] = 28
+    print(character)
+    return character
+
+
+
 def describe_current_location(board, character):
-    location = board[(0, 0)] = [character['Name']]
+    location = board[(character['X'], character['Y'])]  # = [character['Name']]  # placing character at (0, 0)
     character_value = list(board.values()).index(location)
-    character_location = list(board.keys())[character_value]
+    character_location = list(board.keys())[character_value]  # grabbing coordinate of the user
+    # updating the x and y values in charcter dictionary
     character['X'] = character_location[0]
     character['Y'] = character_location[1]
-    print('You are located at', character_location)
+    print('You are located at', character_location, board[character_location])
+    return character_location
 
 
 def get_user_choice():
@@ -174,7 +183,6 @@ def validate_move(board, character, direction):
     while True:
         if direction == 'North':
             character['Y'] += 1
-            print(character['Y'])
         elif direction == 'East':
             character['X'] += 1
         elif direction == 'South':
@@ -182,18 +190,22 @@ def validate_move(board, character, direction):
         elif direction == 'West':
             character['X'] -= 1
 
-        if character['Y'] <= 0:
-            print('NOT VALID')
+        if character['Y'] < 0 or character['X'] < 0:
+            return False
+        elif character['Y'] > 5 or character['X'] > 5:
             return False
         else:
-            print('VALID')
             return True
 
 
-def move_character(character):
+def move_character(location, board, character):
+    print('Y Position: ', character['Y'])
+    board[location] = ['Empty Room']
+    location = (character['X'], character['Y'])
+    print(location)
     print(character)
-    print('huh')
-
+    # print(character['X'], character['Y'])
+    print(board)
 
 
 def check_for_challenges():
@@ -234,12 +246,7 @@ def character_has_leveled():
 
 
 def execute_glow_up_protocol():
-    print('''██╗     ███████╗██╗   ██╗███████╗██╗         ██╗   ██╗██████╗ ██╗    
-    ██║     ██╔════╝██║   ██║██╔════╝██║         ██║   ██║██╔══██╗██║    
-    ██║     █████╗  ██║   ██║█████╗  ██║         ██║   ██║██████╔╝██║    
-    ██║     ██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║         ██║   ██║██╔═══╝ ╚═╝    
-    ███████╗███████╗ ╚████╔╝ ███████╗███████╗    ╚██████╔╝██║     ██╗    
-    ╚══════╝╚══════╝  ╚═══╝  ╚══════╝╚══════╝     ╚═════╝ ╚═╝     ╚═╝ ''')
+    pass
 
 
 def game():  # called from main
@@ -247,14 +254,15 @@ def game():  # called from main
     columns = 5
     board = make_board(rows, columns)
     character = make_character("Player name")
+    player_stats(character)
     achieved_goal = False
     while not achieved_goal:
         # Tell the user where they are
-        describe_current_location(board, character)
+        location = describe_current_location(board, character)
         direction = get_user_choice()
         valid_move = validate_move(board, character, direction)
         if valid_move:
-            move_character(character)
+            move_character(location, board, character)
             describe_current_location(board, character)
             there_is_a_challenge = check_for_challenges()
             if there_is_a_challenge:
@@ -276,10 +284,11 @@ def game():  # called from main
 
 def main():
     game()
-    #character_class()
+    # character_class()
     # print(make_board(5, 5))
-
     print('''
+     
+     
                                         ε  ╣],
                                       Γ]╣╪╠▓▓╣▒ ⌐
                                      [╫▐╣▓╬▓▓╬▓▌▓ ƒ
@@ -292,7 +301,7 @@ def main():
                     ,▄▓▓▀╠▓███████▒░░"░╠╟▌▄▄▄▄╬╩░░░φ█████████▓▌  ▀▄
                    ╓▀─ ▄█▀▓████████▌░░░░≥╚▓▓▓▌Å░░░╔▓██████▓^~╙╙▀▄ └╕
                   ,¬ ▄▀└╓▀▓█████████▓▓▓▄▒╠╥,▄▓▓█▓▓█████████▓▄    ▀
-                    ▓─ Æ.█████▀ ▀███▓▄╬▀████╬▓▓██████▀╙▀███▓─
+                    ▓─ Æ.█████▀ ▀███▓▄╬▀████╬▓▓██████▀╙▀███▓─\
                    └  ' ▓███▀     ╟█████▓██████╣████¬   └███▌
                        ╫▓██╙       ╟███████████████⌐     ╟██╠▒
                       @╣█▌          ╙██████████████▓▄▄,   ▓╬▓╬╕
@@ -308,11 +317,10 @@ def main():
                            ╬╠╬╬███j████████╟██▌██████╬╬▓Γ
                            ▒╠▓██ ` ╚└█╝╙█▀▌▐╣█ Γ█▌▀███▒╬
                           ▐▓╬█▌▀⌐    ╟  ╙▌  ▐▌  █   ██░▒µ
-                          ▓█▓█  ¬        └  └       ████▌''')
+                          ▓█▓█  ¬        └  └       ████▌
+    ''')
 
-
-
-print('''
+    print('''
      
                                           ,  ▓█
                                          ╗▌ ▐██▓
@@ -361,9 +369,7 @@ print('''
                                        .█, ╟▒
                                        .█. ╟▌
                                         ▀  '▀
-     
-     
-''')
+    ''')
 
 
 if __name__ == '__main__':
