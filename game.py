@@ -39,6 +39,12 @@ def make_board(rows: int, columns: int) -> dict:
 
 
 def story():
+    """
+    The lore of my game
+
+    :return: nothing
+    """
+
     print(f"In the vast world of Entia, there was always peace an unity."
           f"\nEveryone worked together to create 'Entia Capital City', a place where everyone could live in peace"
           f"\nHowever, all was not as peaceful as it seemed. Those who lived in the forest did not receive equal treatment"
@@ -82,11 +88,21 @@ def story():
     print(f"Drakon\n\n\n\n\n\n")
 
 
-def make_character(character: str) -> dict[str, int | str | typing.Any]:
+def make_character() -> dict[str, int | str | typing.Any]:
+    """
+    character creation function. Name your character and choose a class to play.
+
+    :return: a dictionary containing information about the character
+    """
     character = input('Input your name: \n')
-    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Level': 1, 'Current_HP': 34, 'Max_HP': 34, 'XP': 1002, 'Class': 'Basic', 'Boss_Status': 'Alive'}
+    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Level': 1, 'Current_HP': 34, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
 
     def character_class() -> list:
+        """
+        choose from a list of classes and their subclasses
+
+        :return: a list containing class and subclass that the user chooses
+        """
         sub_class_choice = ''
         print('\nIn the vast lands of Entia, there are 3 warrior professions, each excelling in different categories.'
               f'\nSwordsman: Masters at the sword, guarantees high damage output, but at a cost.'
@@ -168,6 +184,13 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
 
 
 def player_stats(character: dict) -> dict:
+    """
+    sets stats for the character after choosing a subclass
+
+    :precondition: character must be a dictionary
+    :param character: a dictionary
+    :return: a dictionary with character information
+    """
     if character['Class'] == 'Samurai':
         character['Current_HP'] = 56
         character['Max_HP'] = 56
@@ -196,7 +219,14 @@ def player_stats(character: dict) -> dict:
     return character
 
 
-def player_move_set(character) -> dict:
+def player_move_set(character: dict) -> dict:
+    """
+    sets the players move set after choosing a subclass
+
+    :precondition: character must be a dictionary
+    :param character: a dictionary
+    :return: a dictionary containing character information
+    """
     special = random.randint(5, 16)
     character['Move_Set'] = {'Run': 0}
     if character['Class'] == 'Basic':
@@ -224,6 +254,15 @@ def player_move_set(character) -> dict:
 
 
 def describe_current_location(board: dict, character: dict) -> tuple:
+    """
+    describes to the user where they are on the board.
+
+    :precondition: board must be a dictionary
+    :precondition: character must be a dictionary
+    :param board: a dictionary
+    :param character: a dictionary
+    :return: a tuple containing the player's current coordinates
+    """
     character_location = character['X'], character['Y']
     print(f'You are located at', character_location, board[character_location])
     if board[character_location] == ['Entia Field']:
@@ -249,6 +288,11 @@ def describe_current_location(board: dict, character: dict) -> tuple:
 
 
 def get_user_choice() -> str:
+    """
+    user picks a direction to go
+
+    :return: a string containing the users choice
+    """
     directions = ['North', 'East', 'South', 'West', 'Quit']
     while True:
         for index in enumerate(directions):
@@ -275,6 +319,15 @@ def get_user_choice() -> str:
 
 
 def validate_move(character: dict, direction: str) -> bool:
+    """
+    validates the move of the character. checks if the move that they are doing is valid.
+
+    :precondition: character must be a dictionary
+    :precondition: direction must be a string
+    :param character: a dictionary
+    :param direction: a string
+    :return: a boolean value depending on if the user's move is valid
+    """
     if direction == 'North' and character['Y'] == 4:
         return False
     elif direction == 'South' and character['Y'] == 0:
@@ -287,7 +340,16 @@ def validate_move(character: dict, direction: str) -> bool:
         return True
 
 
-def move_character(character: dict, direction: str):
+def move_character(character: dict, direction: str) -> None:
+    """
+    will move the character depending on their move
+
+    :precondition: character must be a dictionary
+    :precondition: direction must be a string
+    :param character: character is a dictionary
+    :param direction: direction is a string
+    :return: does not return anything
+    """
     if direction == 'North':
         character['Y'] += 1
     elif direction == 'East':
@@ -299,6 +361,13 @@ def move_character(character: dict, direction: str):
 
 
 def check_for_challenges(character: dict) -> bool:
+    """
+    checks if there is a challenge
+
+    :precondition: character must be a dictionary
+    :param character: character is a dictionary
+    :return: returns a boolean value depending on if there is a challenge for the user
+    """
     if character['X'] == 1 and character['Y'] == 0:
         return True
     elif character['X'] == 0 and character['Y'] == 1:
@@ -315,7 +384,14 @@ def check_for_challenges(character: dict) -> bool:
         return False
 
 
-def execute_challenge_protocol(character: dict):
+def execute_challenge_protocol(character: dict) -> None:
+    """
+    will execute a challenge for the user depending on their level
+
+    :precondition: character must be a dictionary
+    :param character: character is a dictionary
+    :return: None
+    """
     if character['Level'] == 1:
         execute_battle(character, 'easy')
     elif character['Level'] == 2:
@@ -325,6 +401,15 @@ def execute_challenge_protocol(character: dict):
 
 
 def execute_battle(character: dict, difficulty: str) -> None:
+    """
+    checks the user's level and scales the enemies damage. Then it initiates the battle sequence.
+
+    :precondition: character must be a dictionary
+    :precondition: difficulty must be a string
+    :param character: character is a dictionary
+    :param difficulty: difficulty is a string
+    :return: None
+    """
     enemy = choose_enemy(character)
     if enemy['Name'] == "Drakon":
         execute_boss(character, enemy)
@@ -373,6 +458,13 @@ def execute_battle(character: dict, difficulty: str) -> None:
 
 
 def filtered_enemies(enemies: dict) -> bool:
+    """
+    checks if the enemies in the list is a 'varyan' or a 'guard'
+
+    :precondition: enemies must be a dictionary
+    :param enemies: a dictionary
+    :return: boolean value depending on if the enemy type is True or False
+    """
     if enemies['Name'] != "varyan" and enemies['Name'] != "guard":
         return False
     else:
@@ -380,6 +472,13 @@ def filtered_enemies(enemies: dict) -> bool:
 
 
 def choose_enemy(character: dict) -> dict | str:
+    """
+    choose the enemy for the user to fight
+
+    :precondition: character must be a dictionary
+    :param character: a dictionary
+    :return: returns a dictionary containing the enemy information or a string that leads to the dictionary name
+    """
     varyan = {'Name': 'Varyan Warrior', 'Current_HP': 37, 'Max_HP': 37, 'Attack': 18, 'Defence': 17, 'XP_Gain': 177}
     guard = {'Name': 'Demon Guard', 'Current_HP': 54, 'Max_HP': 54, 'Attack': 34, 'Defence': 32, 'XP_Gain': 254}
     imp = {'Name': 'Imp', 'Current_HP': 13, 'Max_HP': 13, 'Attack': 9, 'Defence': 9, 'XP_Gain': 56}
@@ -407,7 +506,16 @@ def choose_enemy(character: dict) -> dict | str:
         return slime
 
 
-def execute_boss(character: dict, enemy: dict):
+def execute_boss(character: dict, enemy: dict) -> None:
+    """
+    the final boss battle. the user must be level three for this function to initiate
+
+    :precondition: character must be a dictionary
+    :precondition: enemy must be a dictionary
+    :param character: a dictionary
+    :param enemy: a dictionary
+    :return: None
+    """
     print('''
 
 
@@ -614,6 +722,13 @@ def execute_boss(character: dict, enemy: dict):
 
 
 def check_if_goal_attained(character: dict) -> bool:
+    """
+    checks if the user has beaten the boss
+
+    :precondition: character must be a dictionary
+    :param character: character is a dictionary
+    :return: a boolean value depending on if the boss is dead or not
+    """
     if character['Boss_Status'] == 'Dead':
         return True
     else:
@@ -621,6 +736,13 @@ def check_if_goal_attained(character: dict) -> bool:
 
 
 def character_has_leveled(character: dict) -> bool:
+    """
+    checks if the character has leveled up
+
+    :precondition: character must be a dictionary
+    :param character: a dictionary
+    :return: a boolean value depending on if the character has leveled up
+    """
     if character['XP'] >= 500:
         print(' ▄█          ▄████████  ▄█    █▄     ▄████████  ▄█            ███    █▄     ▄███████▄ \n'
               '███         ███    ███ ███    ███   ███    ███ ███            ███    ███   ███    ███ \n'
@@ -643,6 +765,13 @@ def character_has_leveled(character: dict) -> bool:
 
 
 def execute_glow_up_protocol(character: dict) -> dict:
+    """
+    updates the character stats once the character levels up
+
+    :precondition: character must be a dictionary
+    :param character: a dictionary
+    :return: a dictionary containing character information with updates stats
+    """
     if character['Class'] == 'Samurai':
         character['Current_HP'] += 56
         character['Max_HP'] += 56
@@ -672,11 +801,16 @@ def execute_glow_up_protocol(character: dict) -> dict:
 
 
 def game(): # called from main
+    """
+    game loop
+
+    :return: None
+    """
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    #rtory()
-    character = make_character("Player name")
+    story()
+    character = make_character()
     player_stats(character)
     player_move_set(character)
     achieved_goal = False
