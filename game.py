@@ -84,7 +84,7 @@ def story():
 
 def make_character(character: str) -> dict[str, int | str | typing.Any]:
     character = input('Input your name: \n')
-    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Level': 1, 'Current_HP': 34, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
+    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Level': 1, 'Current_HP': 34, 'Max_HP': 34, 'XP': 1002, 'Class': 'Basic', 'Boss_Status': 'Alive'}
 
     def character_class() -> list:
         sub_class_choice = ''
@@ -158,7 +158,7 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
                 else:
                     print('Invalid sub class!')
 
-        print('Great! you have finished character customization!')
+        print('\nGreat! you have finished character customization!\n\n')
         print('Class:', class_choice, '\nSub Class:', sub_class_choice)
         return [class_choice, sub_class_choice]
 
@@ -168,10 +168,7 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
 
 
 def player_stats(character: dict) -> dict:
-    if character['Class'] == 'Basic':
-        character['Attack'] = 1000
-        character['Defence'] = 85
-    elif character['Class'] == 'Samurai':
+    if character['Class'] == 'Samurai':
         character['Current_HP'] = 56
         character['Max_HP'] = 56
         character['Attack'] = 29
@@ -273,7 +270,7 @@ def get_user_choice() -> str:
             print('GAME OVER!')
             sys.exit()
         else:
-            print('Invalid option, please type something from this list')
+            print('Invalid option, please type something from this list\n\n')
     return user_choice
 
 
@@ -458,7 +455,6 @@ def execute_boss(character: dict, enemy: dict):
     for i in enumerate(character['Move_Set']):
         print(i)
     user_choice = int(input(''))
-    move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]])
     print(f'You chose', list(character["Move_Set"].keys())[user_choice])
     time.sleep(2)
     print(f'Drakon: PATHETIC!')
@@ -474,7 +470,7 @@ def execute_boss(character: dict, enemy: dict):
     print(f'You feel weak! Your attacks do half damage to Drakon... Annoying!')
     time.sleep(1)
     while enemy['Current_HP'] > 100:
-        print(enemy)
+        print(character)
         if character['Current_HP'] < 0:
             print(f'GAME OVER! Drakon still reigns over the land and your story comes to an unfortunate end...')
             print(f'\nThanks for playing!')
@@ -491,9 +487,7 @@ def execute_boss(character: dict, enemy: dict):
         elif user_choice < len(character['Move_Set'].keys()):
             move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]]) // 2
             enemy['Current_HP'] -= move
-            character['Current_HP'] -= enemy['Attack']
             print(f'You dealt', move, 'Damage!')
-            print(f'')
             if random.randint(0, 1) == 1:
                 character['Current_HP'] -= enemy['Attack']
                 print(f"{enemy['Name']} dealt {enemy['Attack']} damage!")
@@ -501,7 +495,7 @@ def execute_boss(character: dict, enemy: dict):
                 print(f"{enemy['Name']} missed!")
         else:
             print(f"Invalid selection, please select a number from the move set")
-    print(f'\n\nDrakon: ARRGH')
+    print(f'\n\nDrakon: ARGH')
     time.sleep(2)
     print(f"{character['Name']}: It's time to put an end to this")
     time.sleep(2)
@@ -681,15 +675,13 @@ def game(): # called from main
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    story()
+    #rtory()
     character = make_character("Player name")
     player_stats(character)
     player_move_set(character)
     achieved_goal = False
     describe_current_location(board, character)
     while not achieved_goal:
-        # Tell the user where they are
-        # location = describe_current_location(board, character)
         direction = get_user_choice()
         valid_move = validate_move(character, direction)
         if valid_move:
@@ -700,6 +692,7 @@ def game(): # called from main
                 execute_challenge_protocol(character)
                 if character_has_leveled(character):
                     execute_glow_up_protocol(character)
+                    player_move_set(character)
             achieved_goal = check_if_goal_attained(character)
         else:
             print('Invalid direction! Try again... ')

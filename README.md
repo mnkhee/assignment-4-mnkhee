@@ -14,7 +14,8 @@ A01334966
 mnkhee
 
 ## Any important comments you'd like to make about your work:
-
+If you are ever having troubles getting to the boss, then just mage then sorcerer and just use Pentagram Beam. It's kind of overpowered and will make your life easier
+Another tip, go back to (0, 0) to gain some health
 
 ## Table containing required elements
 
