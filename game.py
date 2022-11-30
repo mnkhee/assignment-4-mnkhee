@@ -713,7 +713,6 @@ def execute_boss(character: dict, enemy: dict) -> None:
     for i in enumerate(character['Move_Set']):
         print(i)
     user_choice = int(input(''))
-    move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]])
     print(f'You chose', list(character["Move_Set"].keys())[user_choice])
     time.sleep(2)
     print(f'Drakon: ARRGHHHHH')
@@ -800,7 +799,7 @@ def execute_glow_up_protocol(character: dict) -> dict:
     return character
 
 
-def game(): # called from main
+def game():
     """
     game loop
 
