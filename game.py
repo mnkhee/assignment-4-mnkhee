@@ -2,7 +2,6 @@
 Joshua Chuah
 A01334966
 """
-# 150 x 50 ascii art
 import random
 import time
 import sys
@@ -11,6 +10,15 @@ import typing
 
 
 def make_board(rows: int, columns: int) -> dict:
+    """
+    creates and returns board containing coordinates filled with information
+
+    :precondition: rows must be an integer
+    :precondition: columns must be an integer
+    :param rows: an integer
+    :param columns: an integer
+    :return: a board containing tuples as coordinates filled with location names
+    """
     board = {}
 
     for row in range(rows):
@@ -30,9 +38,48 @@ def make_board(rows: int, columns: int) -> dict:
     return board
 
 
-def tutorial() -> None:
-
-    return None
+def story():
+    print(f"In the vast world of Entia, there was always peace an unity."
+          f"\nEveryone worked together to create 'Entia Capital City', a place where everyone could live in peace"
+          f"\nHowever, all was not as peaceful as it seemed. Those who lived in the forest did not receive equal treatment"
+          f"\nThis was because they were different than the others."
+          f"\nThey were often called 'Demons' because of their looks."
+          f"\nDespite the inequality, they did not do anything about it"
+          f"\nThat was until one day, a boy named 'Drakon' was born."
+          f"\nGrowing up, Drakon despised the inequality. He hated it so much..."
+          f"\nHe chose to become an educator amongst the 'demons'."
+          f"\nThat was until one day his father was wrongfully killed by the Entian Royal Guards."
+          f"\nHis eyes filled with rage and he killed the guards, barely surviving in the process"
+          f"\nWith the blood on the floor, One of the guards, with his dying breath, drew a scripture on the floor"
+          f"\nIt summoned a demon, but unbeknownst to the guard, the demon would not be killing Drakon.")
+    time.sleep(15)
+    print(f"\nIt")
+    time.sleep(1)
+    print(f"\nWould")
+    time.sleep(1)
+    print(f"\nKill")
+    time.sleep(1)
+    print(f"\nHim.")
+    time.sleep(1)
+    print(f"\nThe demon locked eye contact with Drakon and negotiated a deal"
+          f"\nDemon: If you sign a contract with me, I will lend you my powers"
+          f"\nDrakon: What's the catch"
+          f"\nDemon: You kill every single person in Entia"
+          f"\nWithout hesitating, Drakon agreed to the contract"
+          f"\nHe felt a rush of evil energy coursing through his veins"
+          f"\nHe walked slowly towards the capital city"
+          f"\nHe killed everyone on sight"
+          f"\nNot even the heroes of the city could stop him"
+          f"\nOne hero decided to run away, running to the most isolated area of Entia"
+          f"\nHe ran to Stowry Village"
+          f"\nThat's when he met you, a strongest warrior of Stowry."
+          f"\nHe saw promise, and even trained you."
+          f"\nHe explained the situation on his deathbed, 12 months after training"
+          f"\nHis dying wish was")
+    time.sleep(10)
+    print(f'\nStop')
+    time.sleep(1)
+    print(f"Drakon\n\n\n\n\n\n")
 
 
 def make_character(character: str) -> dict[str, int | str | typing.Any]:
@@ -42,9 +89,9 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
     def character_class() -> list:
         sub_class_choice = ''
         print('\nIn the vast lands of Entia, there are 3 warrior professions, each excelling in different categories.'
-              f'Swordsman: Masters at the sword, guarantees high damage output, but at a cost.'
-              f'Mage: Masters of magic. Cast down elementals that deal a good amount of damage'
-              f'Tank: High defence, can sponge a lot of hits before going down.\n')
+              f'\nSwordsman: Masters at the sword, guarantees high damage output, but at a cost.'
+              f'\nMage: Masters of magic. Cast down elementals that deal a good amount of damage'
+              f'\nTank: High defence, can sponge a lot of hits before going down.\n')
         while True:
             main_class = ['Swordsman', 'Mage', 'Tank']
             for index in enumerate(main_class):
@@ -326,8 +373,6 @@ def execute_battle(character: dict, difficulty: str) -> None:
 
     print(f'You defeated {enemy["Name"]}!')
     character['XP'] += enemy['XP_Gain']
-    character['Current_HP'] += character['Max_HP'] // 2
-    print(f"You gained {character['Max_HP'] // 2} HP back!")
 
 
 def filtered_enemies(enemies: dict) -> bool:
@@ -636,6 +681,7 @@ def game(): # called from main
     rows = 5
     columns = 5
     board = make_board(rows, columns)
+    story()
     character = make_character("Player name")
     player_stats(character)
     player_move_set(character)
