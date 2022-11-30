@@ -34,14 +34,14 @@ def tutorial(character: dict) -> bool:
 
 
 def make_character(character: str) -> dict[str, int | str | typing.Any]:
-    # character = input('Input your name: \n')
-    player_info = {'Name': character, 'X': 4, 'Y': 2, 'Level': 3, 'Current_HP': 90000, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
+    character = input('Input your name: \n')
+    player_info = {'Name': character, 'X': 4, 'Y': 2, 'Level': 3, 'Current_HP': 34, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
 
     def character_class() -> list:
         sub_class_choice = ''
         print('\nIn the vast lands of Entia, there are 3 warrior professions, each excelling in different categories.'
               f'Swordsman: Masters at the sword, guarantees high damage output, but at a cost.'
-              f'Mage: Masters of magic, rely on mana to cast elementals.'
+              f'Mage: Masters of magic. Cast down elementals that deal a good amount of damage'
               f'Tank: High defence, can sponge a lot of hits before going down.\n')
         while True:
             main_class = ['Swordsman', 'Mage', 'Tank']
@@ -122,37 +122,31 @@ def player_stats(character: dict) -> dict:
     if character['Class'] == 'Basic':
         character['Attack'] = 1000
         character['Defence'] = 85
-        character['Stamina'] = 345
     elif character['Class'] == 'Samurai':
         character['Current_HP'] = 56
         character['Max_HP'] = 56
         character['Attack'] = 29
         character['Defence'] = 12
-        character['Stamina'] = 100
     elif character['Class'] == 'Berserker':
         character['Current_HP'] = 67
         character['Max_HP'] = 67
         character['Attack'] = 21
         character['Defence'] = 21
-        character['Stamina'] = 100
     elif character['Class'] == 'Sorcerer':
         character['Current_HP'] = 48
         character['Max_HP'] = 48
         character['Attack'] = 34
         character['Defence'] = 11
-        character['Mana'] = 75
     elif character['Class'] == 'Elementalist':
         character['Current_HP'] = 73
         character['Max_HP'] = 73
         character['Attack'] = 18
         character['Defence'] = 18
-        character['Mana'] = 109
     elif character['Class'] == 'Paladin':
         character['Current_HP'] = 87
         character['Max_HP'] = 87
         character['Attack'] = 14
         character['Defence'] = 28
-        character['Stamina'] = 89
     return character
 
 
@@ -400,7 +394,6 @@ def execute_boss(character: dict, enemy: dict):
     user_choice = int(input(''))
     move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]])
     print(f'You chose', list(character["Move_Set"].keys())[user_choice])
-    print(f'You dealt...')
     time.sleep(2)
     print(f'Drakon: PATHETIC!')
     time.sleep(2)
@@ -412,16 +405,14 @@ def execute_boss(character: dict, enemy: dict):
     time.sleep(5)
     print(f'Drakon: WELCOME TO MY DOMAIN')
     time.sleep(2)
-    print(f'Drakon will deal 10 damage to your character every turn... Annoying!')
+    print(f'You feel weak! Your attacks do half damage to Drakon... Annoying!')
     time.sleep(1)
-    print(f'You lose 5 HP')
     while enemy['Current_HP'] > 100:
         print(enemy)
         if character['Current_HP'] < 0:
-            print(f'GAME OVER! Your journey comes to an unfortunate end...')
+            print(f'GAME OVER! Drakon still reigns over the land and your story comes to an unfortunate end...')
             print(f'\nThanks for playing!')
             sys.exit()
-        print(f"You are going against {enemy['Name']}")
         print("What's your move?")
         for i in enumerate(character['Move_Set']):
             print(i)
@@ -432,9 +423,11 @@ def execute_boss(character: dict, enemy: dict):
             character['Current_HP'] -= enemy['Attack']
             return None
         elif user_choice < len(character['Move_Set'].keys()):
-            move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]])
+            move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]]) // 2
             enemy['Current_HP'] -= move
-            print('You dealt', move, 'Damage!')
+            character['Current_HP'] -= enemy['Attack']
+            print(f'You dealt', move, 'Damage!')
+            print(f'')
             if random.randint(0, 1) == 1:
                 character['Current_HP'] -= enemy['Attack']
                 print(f"{enemy['Name']} dealt {enemy['Attack']} damage!")
@@ -442,110 +435,20 @@ def execute_boss(character: dict, enemy: dict):
                 print(f"{enemy['Name']} missed!")
         else:
             print(f"Invalid selection, please select a number from the move set")
-    character['Boss_Status'] = 'Dead'
-    return None
-
-
-def check_if_goal_attained(character: dict) -> bool:
-    if character['Boss_Status'] == 'Dead':
-        return True
-    else:
-        return False
-
-
-def character_has_leveled(character: dict) -> bool:
-    if character['XP'] >= 500:
-        print(' ▄█          ▄████████  ▄█    █▄     ▄████████  ▄█            ███    █▄     ▄███████▄ \n'
-              '███         ███    ███ ███    ███   ███    ███ ███            ███    ███   ███    ███ \n'
-              '███         ███    █▀  ███    ███   ███    █▀  ███            ███    ███   ███    ███ \n'
-              '███        ▄███▄▄▄     ███    ███  ▄███▄▄▄     ███            ███    ███   ███    ███ \n'
-              '███       ▀▀███▀▀▀     ███    ███ ▀▀███▀▀▀     ███            ███    ███ ▀█████████▀  \n'
-              '███         ███    █▄  ███    ███   ███    █▄  ███            ███    ███   ███        \n'
-              '███▌    ▄   ███    ███ ███    ███   ███    ███ ███▌    ▄      ███    ███   ███        \n'
-              '█████▄▄██   ██████████  ▀██████▀    ██████████ █████▄▄██      ████████▀   ▄████▀      \n'
-              '▀                                              ▀                                      ')
-        character['XP'] -= 500
-        character['Level'] += 1
-        if character['Level'] == 3:
-            print(f"Great job {character['Name']}! The cloudy skies start to darken at Drakon's Castle (4, 3)"
-                  f" Its time to put an end to the wrath put down on Entia.")
-            return True
-        else:
-            print(f"Great job {character['Name']}! You are one step away from Drakon.")
-            return True
-
-
-def execute_glow_up_protocol(character: dict) -> dict:
-    if character['Class'] == 'Samurai':
-        character['Current_HP'] += 56
-        character['Max_HP'] += 56
-        character['Attack'] += 35
-        character['Defence'] += 12
-        character['Stamina'] += 100
-    elif character['Class'] == 'Berserker':
-        character['Current_HP'] += 67
-        character['Max_HP'] += 67
-        character['Attack'] += 27
-        character['Defence'] += 21
-        character['Stamina'] += 100
-    elif character['Class'] == 'Sorcerer':
-        character['Current_HP'] += 48
-        character['Max_HP'] += 48
-        character['Attack'] += 40
-        character['Defence'] += 11
-        character['Mana'] += 75
-    elif character['Class'] == 'Elementalist':
-        character['Current_HP'] += 73
-        character['Max_HP'] += 73
-        character['Attack'] += 25
-        character['Defence'] += 18
-        character['Mana'] += 109
-    elif character['Class'] == 'Paladin':
-        character['Current_HP'] += 165
-        character['Max_HP'] += 165
-        character['Attack'] += 20
-        character['Defence'] += 28
-        character['Stamina'] += 89
-    return character
-
-
-def game():  # called from main
-    rows = 5
-    columns = 5
-    board = make_board(rows, columns)
-    character = make_character("Player name")
-    player_stats(character)
-    player_move_set(character)
-    achieved_goal = False
-    describe_current_location(board, character)
-    while not achieved_goal:
-        # Tell the user where they are
-        # location = describe_current_location(board, character)
-        direction = get_user_choice()
-        valid_move = validate_move(character, direction)
-        if valid_move:
-            move_character(character, direction)
-            describe_current_location(board, character)
-            there_is_a_challenge = check_for_challenges(character)
-            if there_is_a_challenge:
-                execute_challenge_protocol(character)
-                if character_has_leveled(character):
-                    execute_glow_up_protocol(character)
-            achieved_goal = check_if_goal_attained(character)
-        else:
-            print('Invalid direction! Try again... ')
-
-            # Tell the user they can’t go in that direction
-        # Print end of game stuff like congratulations or sorry you died
-
-    print('you win')
-
-
-def main():
-    game()
-
+    print(f'\n\nDrakon: ARRGH')
+    time.sleep(2)
+    print(f"{character['Name']}: It's time to put an end to this")
+    time.sleep(2)
+    print(f"Drakon: IT'S")
+    time.sleep(2)
+    print(f"Drakon: NOT")
+    time.sleep(2)
+    print(f"Drakon: OVER")
+    time.sleep(2)
+    print(f"\n\nDrakon Uses: ᚷᛁᚨᚾᛏ ᚠᛟᚱᛗᚢᛚᚨ\n\n")
+    time.sleep(2)
     print('''
-     
+
                                           ,  ▓█
                                          ╗▌ ▐██▓
                               ▐⌐    ].  ╓█▌]███▓▌  ]▌    ║▄
@@ -594,6 +497,142 @@ def main():
                                        .█. ╟▌
                                         ▀  '▀
     ''')
+    time.sleep(2)
+    print(f"\n\nDrakon is in his giant form. His hits deal a lot of damage, but he has a low chance of hitting. "
+          f"You feel a rush of fury over you! Your attacks do normal damage and you gain a x2 health boost")
+    enemy['Current_HP'] = enemy['Max_HP'] * 3
+    enemy['Attack'] = 119
+    character['Current_HP'] = character['Max_HP'] * 2
+    while enemy['Current_HP'] > 0:
+        if character['Current_HP'] <= 0:
+            print(f'GAME OVER! Drakon still reigns over the land and your story comes to an unfortunate end...')
+            print(f'\nThanks for playing!')
+            sys.exit()
+        print("What's your move?")
+        for i in enumerate(character['Move_Set']):
+            print(i)
+        user_choice = int(input(''))
+        if user_choice == 0:
+            print(f'You ran away! What a bummer...')
+            print(f"You lose {enemy['Attack']} HP")
+            character['Current_HP'] -= enemy['Attack']
+            return None
+        elif user_choice < len(character['Move_Set'].keys()):
+            move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]]) // 2
+            enemy['Current_HP'] -= move
+            character['Current_HP'] -= enemy['Attack']
+            print(f'You dealt', move, 'Damage!')
+            print(f'')
+            if random.randint(0, 1) == 1:
+                character['Current_HP'] -= enemy['Attack']
+                print(f"{enemy['Name']} dealt {enemy['Attack']} damage!")
+            else:
+                print(f"{enemy['Name']} missed!")
+        else:
+            print(f"Invalid selection, please select a number from the move set")
+    print(f"Drakon: HOW")
+    time.sleep(2)
+    print(f"{character['Name']}: Your reign ends here Drakon. Entia wont have to worry about you any longer")
+    print(f"What's your move?")
+    for i in enumerate(character['Move_Set']):
+        print(i)
+    user_choice = int(input(''))
+    move = (character['Move_Set'][list(character['Move_Set'].keys())[user_choice]])
+    print(f'You chose', list(character["Move_Set"].keys())[user_choice])
+    time.sleep(2)
+    print(f'Drakon: ARRGHHHHH')
+    character['Boss_Status'] = 'Dead'
+    return None
+
+
+def check_if_goal_attained(character: dict) -> bool:
+    if character['Boss_Status'] == 'Dead':
+        return True
+    else:
+        return False
+
+
+def character_has_leveled(character: dict) -> bool:
+    if character['XP'] >= 500:
+        print(' ▄█          ▄████████  ▄█    █▄     ▄████████  ▄█            ███    █▄     ▄███████▄ \n'
+              '███         ███    ███ ███    ███   ███    ███ ███            ███    ███   ███    ███ \n'
+              '███         ███    █▀  ███    ███   ███    █▀  ███            ███    ███   ███    ███ \n'
+              '███        ▄███▄▄▄     ███    ███  ▄███▄▄▄     ███            ███    ███   ███    ███ \n'
+              '███       ▀▀███▀▀▀     ███    ███ ▀▀███▀▀▀     ███            ███    ███ ▀█████████▀  \n'
+              '███         ███    █▄  ███    ███   ███    █▄  ███            ███    ███   ███        \n'
+              '███▌    ▄   ███    ███ ███    ███   ███    ███ ███▌    ▄      ███    ███   ███        \n'
+              '█████▄▄██   ██████████  ▀██████▀    ██████████ █████▄▄██      ████████▀   ▄████▀      \n'
+              '▀                                              ▀                                      ')
+        character['XP'] -= 500
+        character['Level'] += 1
+        if character['Level'] == 3:
+            print(f"Great job {character['Name']}! The cloudy skies start to darken at Drakon's Castle (4, 3)"
+                  f" Its time to put an end to the wrath put down on Entia.")
+            return True
+        else:
+            print(f"Great job {character['Name']}! You are one step away from Drakon.")
+            return True
+
+
+def execute_glow_up_protocol(character: dict) -> dict:
+    if character['Class'] == 'Samurai':
+        character['Current_HP'] += 56
+        character['Max_HP'] += 56
+        character['Attack'] += 35
+        character['Defence'] += 12
+    elif character['Class'] == 'Berserker':
+        character['Current_HP'] += 67
+        character['Max_HP'] += 67
+        character['Attack'] += 27
+        character['Defence'] += 21
+    elif character['Class'] == 'Sorcerer':
+        character['Current_HP'] += 48
+        character['Max_HP'] += 48
+        character['Attack'] += 40
+        character['Defence'] += 11
+    elif character['Class'] == 'Elementalist':
+        character['Current_HP'] += 73
+        character['Max_HP'] += 73
+        character['Attack'] += 25
+        character['Defence'] += 18
+    elif character['Class'] == 'Paladin':
+        character['Current_HP'] += 165
+        character['Max_HP'] += 165
+        character['Attack'] += 20
+        character['Defence'] += 28
+    return character
+
+
+def game(): # called from main
+    rows = 5
+    columns = 5
+    board = make_board(rows, columns)
+    character = make_character("Player name")
+    player_stats(character)
+    player_move_set(character)
+    achieved_goal = False
+    describe_current_location(board, character)
+    while not achieved_goal:
+        # Tell the user where they are
+        # location = describe_current_location(board, character)
+        direction = get_user_choice()
+        valid_move = validate_move(character, direction)
+        if valid_move:
+            move_character(character, direction)
+            describe_current_location(board, character)
+            there_is_a_challenge = check_for_challenges(character)
+            if there_is_a_challenge:
+                execute_challenge_protocol(character)
+                if character_has_leveled(character):
+                    execute_glow_up_protocol(character)
+            achieved_goal = check_if_goal_attained(character)
+        else:
+            print('Invalid direction! Try again... ')
+    print(f'GAME OVER: GOOD ENDING! \nYou beat Drakon and brought peace to Entia')
+
+
+def main():
+    game()
 
 
 if __name__ == '__main__':
