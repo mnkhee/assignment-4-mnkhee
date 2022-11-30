@@ -30,13 +30,14 @@ def make_board(rows: int, columns: int) -> dict:
     return board
 
 
-def tutorial(character: dict) -> bool:
-    return False
+def tutorial() -> None:
+
+    return None
 
 
 def make_character(character: str) -> dict[str, int | str | typing.Any]:
     character = input('Input your name: \n')
-    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Level': 3, 'Current_HP': 34, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
+    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Level': 1, 'Current_HP': 34, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
 
     def character_class() -> list:
         sub_class_choice = ''
@@ -153,9 +154,8 @@ def player_stats(character: dict) -> dict:
 
 def player_move_set(character) -> dict:
     special = random.randint(5, 16)
-    character['Move_Set'] = {}
+    character['Move_Set'] = {'Run': 0}
     if character['Class'] == 'Basic':
-        character['Move_Set']['Run'] = 0
         character['Move_Set']['Punch'] = character['Attack']
     elif character['Class'] == 'Samurai':
         character['Move_Set']['Swift Strike'] = character['Attack']
@@ -280,9 +280,9 @@ def execute_challenge_protocol(character: dict):
         execute_battle(character, 'hard')
 
 
-def execute_battle(character: dict, difficulty: str):
+def execute_battle(character: dict, difficulty: str) -> None:
     enemy = choose_enemy(character)
-    if enemy['Name'] == "'Demon King' Drakon":
+    if enemy['Name'] == "Drakon":
         execute_boss(character, enemy)
         return None
     if difficulty == 'medium':
@@ -326,21 +326,37 @@ def execute_battle(character: dict, difficulty: str):
 
     print(f'You defeated {enemy["Name"]}!')
     character['XP'] += enemy['XP_Gain']
-    character['Current_HP'] += character['Max_HP'] / 2
-    print(character[f"You gained {character['Max_HP'] / 2} HP back!"])
+    character['Current_HP'] += character['Max_HP'] // 2
+    print(f"You gained {character['Max_HP'] // 2} HP back!")
 
 
-def choose_enemy(character: dict):
-    selection = random.randint(0, 1)
+def filtered_enemies(enemies: dict) -> bool:
+    if enemies['Name'] != "varyan" and enemies['Name'] != "guard":
+        return False
+    else:
+        return True
+
+
+def choose_enemy(character: dict) -> dict | str:
     varyan = {'Name': 'Varyan Warrior', 'Current_HP': 37, 'Max_HP': 37, 'Attack': 18, 'Defence': 17, 'XP_Gain': 177}
-    imp = {'Name': 'Imp', 'Current_HP': 13, 'Max_HP': 13, 'Attack': 9, 'Defence': 9, 'XP_Gain': 500} #56}
-    goblin = {'Name': 'Goblin', 'Current_HP': 19, 'Max_HP': 19, 'Attack': 16, 'Defence': 17, 'XP_Gain': 500} #123}
-    slime = {'Name': 'Slime', 'Current_HP': 7, 'Max_HP': 7, 'Attack': 5, 'Defence': 4, 'XP_Gain': 500} #43}
-    drakon = {'Name': "'Demon King' Drakon", 'Current_HP': 256, 'Max_HP': 256, 'Attack': 82, 'Defence': 54}
+    guard = {'Name': 'Demon Guard', 'Current_HP': 54, 'Max_HP': 54, 'Attack': 34, 'Defence': 32, 'XP_Gain': 254}
+    imp = {'Name': 'Imp', 'Current_HP': 13, 'Max_HP': 13, 'Attack': 9, 'Defence': 9, 'XP_Gain': 56}
+    goblin = {'Name': 'Goblin', 'Current_HP': 19, 'Max_HP': 19, 'Attack': 16, 'Defence': 17, 'XP_Gain': 123}
+    slime = {'Name': 'Slime', 'Current_HP': 7, 'Max_HP': 7, 'Attack': 5, 'Defence': 4, 'XP_Gain': 43}
+    drakon = {'Name': "Drakon", 'Current_HP': 256, 'Max_HP': 256, 'Attack': 82, 'Defence': 54}
+    rand_num = random.randint(0, 1)
+    enemies = [varyan, guard, imp, goblin, slime, drakon]
+    harbour_guard = []
+    selection = filter(filtered_enemies, enemies)
+    for enemy in enemies:
+        harbour_guard.append(enemy)
+    final_selection = harbour_guard[rand_num]
     if character['X'] == 2 and character['Y'] == 3:
         return varyan
     if character['X'] == 4 and character['Y'] == 3 and character['Level'] == 3:
         return drakon
+    if character['X'] == 0 and character['Y'] == 4:
+        return final_selection
     if selection == 0:
         return imp
     elif selection == 1:
@@ -538,6 +554,14 @@ def execute_boss(character: dict, enemy: dict):
     print(f"Drakon: HOW")
     time.sleep(2)
     print(f"{character['Name']}: Your reign ends here Drakon. Entia wont have to worry about you any longer")
+    time.sleep(2)
+    call = list(itertools.repeat('DAMN IT', 10))
+    string = ''
+    for i in call:
+        string += ' ' + i
+
+    print(string)
+    time.sleep(2)
     print(f"What's your move?")
     for i in enumerate(character['Move_Set']):
         print(i)
