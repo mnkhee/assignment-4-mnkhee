@@ -11,8 +11,6 @@ import typing
 
 
 def make_board(rows: int, columns: int) -> dict:
-    # return a dictionary with positions as keys and what's at those positions as values
-    # some rooms will be empty, some rooms will have enemies
     board = {}
 
     for row in range(rows):
@@ -26,6 +24,9 @@ def make_board(rows: int, columns: int) -> dict:
     board[(2, 3)] = ["Entia Lake"]
     board[(4, 3)] = ["Drakon's Castle"]
     board[(1, 4)] = ["Entia Capital City"]
+    board[(0, 4)] = ["Makna Harbour"]
+    board[(3, 3)] = ["Satorl Forest"]
+    board[(2, 3)] = ["Satorl Forest"]
     return board
 
 
@@ -35,7 +36,7 @@ def tutorial(character: dict) -> bool:
 
 def make_character(character: str) -> dict[str, int | str | typing.Any]:
     character = input('Input your name: \n')
-    player_info = {'Name': character, 'X': 4, 'Y': 2, 'Level': 3, 'Current_HP': 34, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
+    player_info = {'Name': character, 'X': 0, 'Y': 0, 'Level': 3, 'Current_HP': 34, 'Max_HP': 34, 'XP': 0, 'Class': 'Basic', 'Boss_Status': 'Alive'}
 
     def character_class() -> list:
         sub_class_choice = ''
@@ -45,8 +46,8 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
               f'Tank: High defence, can sponge a lot of hits before going down.\n')
         while True:
             main_class = ['Swordsman', 'Mage', 'Tank']
-            for i in enumerate(main_class):
-                print(i)
+            for index in enumerate(main_class):
+                print(index)
             class_options = input('\nChoose a profession: \n').title()
 
             if class_options == '0':
@@ -70,8 +71,8 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
               Berserker: An immovable object meets an unstoppable force to form a warrior who stops at nothing to strike the enemy down. [High damage, high defence].\n''')
             while True:
                 sword_sub = ['Samurai', 'Berserker']
-                for i in enumerate(sword_sub):
-                    print(i)
+                for index in enumerate(sword_sub):
+                    print(index)
                 sub_class_options = input('Choose a subclass: \n 0: Samurai \n 1: Berserker \n').title()
                 if sub_class_options == '0':
                     sub_class_choice = 'Samurai'
@@ -87,8 +88,8 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
                 Elementalist: Utilizes the four elementals to inflict damage on their foes. [Medium damage, medium defence, medium mana consumption].\n''')
             while True:
                 mage_sub = ['Sorcerer', 'Elementalist']
-                for i in enumerate(mage_sub):
-                    print(i)
+                for index in enumerate(mage_sub):
+                    print(index)
                 sub_class_options = input('\nChoose a subclass:').title()
                 if sub_class_options == '0':
                     sub_class_choice = 'Sorcerer'
@@ -113,8 +114,8 @@ def make_character(character: str) -> dict[str, int | str | typing.Any]:
         print('Class:', class_choice, '\nSub Class:', sub_class_choice)
         return [class_choice, sub_class_choice]
 
-    # player_class = character_class()
-    # player_info['Class'] = player_class[1]
+    player_class = character_class()
+    player_info['Class'] = player_class[1]
     return player_info
 
 
@@ -180,19 +181,23 @@ def player_move_set(character) -> dict:
 
 def describe_current_location(board: dict, character: dict) -> tuple:
     character_location = character['X'], character['Y']
-    print('You are located at', character_location, board[character_location])
+    print(f'You are located at', character_location, board[character_location])
     if board[character_location] == ['Entia Field']:
-        print('A vast field connecting each part of Entia')
+        print(f'A vast field connecting each part of Entia')
     elif board[character_location] == ['Entia Capital City']:
-        print("The capital city of Entia, houses many shops to buy goods from.")
+        print(f"The capital city of Entia, houses many shops to buy goods from.")
     elif board[character_location] == ['Entia Lake']:
-        print("Home of the Varya, Entia's water tribe. Very deadly if you get on the wrong terms.")
+        print(f"Home of the Varya, Entia's water tribe. Very deadly if you get on the wrong terms.")
+    elif board[character_location] == ['Makna Harbour']:
+        print(f"Many imports come this way. All goods brought to Drakon")
+    elif board[character_location] == ["Satorl Forest"]:
+        print(f"Home of Drakon. This area is mostly dead and all signs of civilization has vanished.")
     elif board[character_location] == ['Stowry Village']:
-        print(character['Name'] + "'s home. There is a very nostalgic feeling every time you are here...")
-        print("If you are ever in need of health, come here to restore some health!")
+        print(f"{character['Name']}'s home. There is a very nostalgic feeling every time you are here...")
+        print(f"If you are ever in need of health, come here to restore some health!")
         if character['Current_HP'] < character['Max_HP']:
             character['Current_HP'] += random.randint(10, character['Max_HP'])
-            print('Your health has been restored to max!')
+            print(f'Your health has been restored to max!')
     elif board[character_location] == ['Margrove Pass']:
         print(
             'The border between Stowry Village and Entia Field. This desolate area keeps residence of Stowry stuck. Home to many monsters...')
@@ -202,8 +207,8 @@ def describe_current_location(board: dict, character: dict) -> tuple:
 def get_user_choice() -> str:
     directions = ['North', 'East', 'South', 'West', 'Quit']
     while True:
-        for i in enumerate(directions):
-            print(i)
+        for index in enumerate(directions):
+            print(index)
         user_choice = input('\nPick a direction to move: \n')
         if user_choice == '0':
             user_choice = 'North'
