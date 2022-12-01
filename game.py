@@ -369,6 +369,10 @@ def check_for_challenges(character: dict) -> bool:
     :precondition: character must be a dictionary
     :param character: character is a dictionary
     :return: returns a boolean value depending on if there is a challenge for the user
+    >>> check_for_challenges({'X': 1, 'Y': 0})
+    True
+    >>> check_for_challenges({'X': 0, 'Y': 0})
+    False
     """
     if character['X'] == 1 and character['Y'] == 0:
         return True
@@ -395,11 +399,11 @@ def execute_challenge_protocol(character: dict) -> None:
     :return: None
     """
     if character['Level'] == 1:
-        execute_battle(character, 'easy')
+        return execute_battle(character, 'easy')
     elif character['Level'] == 2:
-        execute_battle(character, 'medium')
+        return execute_battle(character, 'medium')
     elif character['Level'] == 3:
-        execute_battle(character, 'hard')
+        return execute_battle(character, 'hard')
 
 
 def execute_battle(character: dict, difficulty: str) -> None:
