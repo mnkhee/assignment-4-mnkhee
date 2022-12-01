@@ -40,56 +40,6 @@ def make_board(rows: int, columns: int) -> dict:
     return board
 
 
-def story():
-    """
-    The lore of my game
-
-    :return: nothing
-    """
-
-    print(f"In the vast world of Entia, there was always peace an unity."
-          f"\nEveryone worked together to create 'Entia Capital City', a place where everyone could live in peace"
-          f"\nHowever, all was not as peaceful as it seemed. Those who lived in the forest did not receive equal treatment"
-          f"\nThis was because they were different than the others."
-          f"\nThey were often called 'Demons' because of their looks."
-          f"\nDespite the inequality, they did not do anything about it"
-          f"\nThat was until one day, a boy named 'Drakon' was born."
-          f"\nGrowing up, Drakon despised the inequality. He hated it so much..."
-          f"\nHe chose to become an educator amongst the 'demons'."
-          f"\nThat was until one day his father was wrongfully killed by the Entian Royal Guards."
-          f"\nHis eyes filled with rage and he killed the guards, barely surviving in the process"
-          f"\nWith the blood on the floor, One of the guards, with his dying breath, drew a scripture on the floor"
-          f"\nIt summoned a demon, but unbeknownst to the guard, the demon would not be killing Drakon.")
-    time.sleep(15)
-    print(f"\nIt")
-    time.sleep(1)
-    print(f"\nWould")
-    time.sleep(1)
-    print(f"\nKill")
-    time.sleep(1)
-    print(f"\nHim.")
-    time.sleep(1)
-    print(f"\nThe demon locked eye contact with Drakon and negotiated a deal"
-          f"\nDemon: If you sign a contract with me, I will lend you my powers"
-          f"\nDrakon: What's the catch"
-          f"\nDemon: You kill every single person in Entia"
-          f"\nWithout hesitating, Drakon agreed to the contract"
-          f"\nHe felt a rush of evil energy coursing through his veins"
-          f"\nHe walked slowly towards the capital city"
-          f"\nHe killed everyone on sight"
-          f"\nNot even the heroes of the city could stop him"
-          f"\nOne hero decided to run away, running to the most isolated area of Entia"
-          f"\nHe ran to Stowry Village"
-          f"\nThat's when he met you, a strongest warrior of Stowry."
-          f"\nHe saw promise, and even trained you."
-          f"\nHe explained the situation on his deathbed, 12 months after training"
-          f"\nHis dying wish was")
-    time.sleep(10)
-    print(f'\nStop')
-    time.sleep(1)
-    print(f"Drakon\n\n\n\n\n\n")
-
-
 def make_character() -> dict[str, int | str | typing.Any]:
     """
     character creation function. Name your character and choose a class to play.
@@ -825,10 +775,50 @@ def game():
 
     :return: None
     """
+    print(f"In the vast world of Entia, there was always peace an unity."
+          f"\nEveryone worked together to create 'Entia Capital City', a place where everyone could live in peace"
+          f"\nHowever, all was not as peaceful as it seemed. Those who lived in the forest did not receive equal treatment"
+          f"\nThis was because they were different than the others."
+          f"\nThey were often called 'Demons' because of their looks."
+          f"\nDespite the inequality, they did not do anything about it"
+          f"\nThat was until one day, a boy named 'Drakon' was born."
+          f"\nGrowing up, Drakon despised the inequality. He hated it so much..."
+          f"\nHe chose to become an educator amongst the 'demons'."
+          f"\nThat was until one day his father was wrongfully killed by the Entian Royal Guards."
+          f"\nHis eyes filled with rage and he killed the guards, barely surviving in the process"
+          f"\nWith the blood on the floor, One of the guards, with his dying breath, drew a scripture on the floor"
+          f"\nIt summoned a demon, but unbeknownst to the guard, the demon would not be killing Drakon.")
+    time.sleep(15)
+    print(f"\nIt")
+    time.sleep(1)
+    print(f"\nWould")
+    time.sleep(1)
+    print(f"\nKill")
+    time.sleep(1)
+    print(f"\nHim.")
+    time.sleep(1)
+    print(f"\nThe demon locked eye contact with Drakon and negotiated a deal"
+          f"\nDemon: If you sign a contract with me, I will lend you my powers"
+          f"\nDrakon: What's the catch"
+          f"\nDemon: You kill every single person in Entia"
+          f"\nWithout hesitating, Drakon agreed to the contract"
+          f"\nHe felt a rush of evil energy coursing through his veins"
+          f"\nHe walked slowly towards the capital city"
+          f"\nHe killed everyone on sight"
+          f"\nNot even the heroes of the city could stop him"
+          f"\nOne hero decided to run away, running to the most isolated area of Entia"
+          f"\nHe ran to Stowry Village"
+          f"\nThat's when he met you, a strongest warrior of Stowry."
+          f"\nHe saw promise, and even trained you."
+          f"\nHe explained the situation on his deathbed, 12 months after training"
+          f"\nHis dying wish was")
+    time.sleep(10)
+    print(f'\nStop')
+    time.sleep(1)
+    print(f"Drakon\n\n\n\n\n\n")
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    story()
     character = make_character()
     player_stats(character)
     player_move_set(character)
