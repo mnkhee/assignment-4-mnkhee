@@ -411,8 +411,8 @@ def execute_battle(character: dict, difficulty: str) -> None:
             sys.exit()
         print(f"You are going against {enemy['Name']}")
         print("What's your move?")
-        for i in enumerate(character['Move_Set']):
-            print(i)
+        for index in enumerate(character['Move_Set']):
+            print(index)
         user_choice = int(input(''))
         if user_choice == 0:
             print(f'You ran away! What a bummer...')
@@ -469,7 +469,7 @@ def choose_enemy(character: dict) -> dict | str:
     drakon = {'Name': "Drakon", 'Current_HP': 256, 'Max_HP': 256, 'Attack': 82, 'Defence': 54}
     rand_num = random.randint(0, 1)
     enemies = [varyan, guard, imp, goblin, slime, drakon]
-    harbour_guard = [i for i in enemies]
+    harbour_guard = [enemy for enemy in enemies]
     selection = filter(filtered_enemies, enemies)
     final_selection = harbour_guard[rand_num]
     if character['X'] == 2 and character['Y'] == 3:
@@ -542,8 +542,8 @@ def execute_boss(character: dict, enemy: dict) -> None:
     time.sleep(2)
     print(f"Drakon: MWAHAHAHAHA... Don't make me laugh...")
     print(f"What's your move?")
-    for i in enumerate(character['Move_Set']):
-        print(i)
+    for index in enumerate(character['Move_Set']):
+        print(index)
     user_choice = int(input(''))
     print(f'You chose', list(character["Move_Set"].keys())[user_choice])
     time.sleep(2)
@@ -566,8 +566,8 @@ def execute_boss(character: dict, enemy: dict) -> None:
             print(f'\nThanks for playing!')
             sys.exit()
         print("What's your move?")
-        for i in enumerate(character['Move_Set']):
-            print(i)
+        for index in enumerate(character['Move_Set']):
+            print(index)
         user_choice = int(input(''))
         if user_choice == 0:
             print(f'You ran away! What a bummer...')
@@ -659,8 +659,8 @@ def execute_boss(character: dict, enemy: dict) -> None:
             print(f'\nThanks for playing!')
             sys.exit()
         print("What's your move?")
-        for i in enumerate(character['Move_Set']):
-            print(i)
+        for index in enumerate(character['Move_Set']):
+            print(index)
         user_choice = int(input(''))
         if user_choice == 0:
             print(f'You ran away! What a bummer...')
@@ -686,14 +686,14 @@ def execute_boss(character: dict, enemy: dict) -> None:
     time.sleep(2)
     call = list(itertools.repeat('DAMN IT', 10))
     string = ''
-    for i in call:
-        string += ' ' + i
+    for index in call:
+        string += ' ' + index
 
     print(string)
     time.sleep(2)
     print(f"What's your move?")
-    for i in enumerate(character['Move_Set']):
-        print(i)
+    for index in enumerate(character['Move_Set']):
+        print(index)
     user_choice = int(input(''))
     print(f'You chose', list(character["Move_Set"].keys())[user_choice])
     time.sleep(2)
