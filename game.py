@@ -192,6 +192,10 @@ def player_stats(character: dict) -> dict:
     :precondition: character must be a dictionary
     :param character: a dictionary
     :return: a dictionary with character information
+    >>> player_stats({'Class': 'Samurai'})
+    {'Class': 'Samurai', 'Current_HP': 56, 'Max_HP': 56, 'Attack': 29, 'Defence': 12}
+    >>> player_stats({'Class': 'Sorcerer'})
+    {'Class': 'Sorcerer', 'Current_HP': 48, 'Max_HP': 48, 'Attack': 34, 'Defence': 11}
     """
     if character['Class'] == 'Samurai':
         character['Current_HP'] = 56
