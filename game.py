@@ -469,10 +469,8 @@ def choose_enemy(character: dict) -> dict | str:
     drakon = {'Name': "Drakon", 'Current_HP': 256, 'Max_HP': 256, 'Attack': 82, 'Defence': 54}
     rand_num = random.randint(0, 1)
     enemies = [varyan, guard, imp, goblin, slime, drakon]
-    harbour_guard = []
+    harbour_guard = [i for i in enemies]
     selection = filter(filtered_enemies, enemies)
-    for enemy in enemies:
-        harbour_guard.append(enemy)
     final_selection = harbour_guard[rand_num]
     if character['X'] == 2 and character['Y'] == 3:
         return varyan

@@ -19,3 +19,20 @@ Another tip, go back to (0, 0) to gain some health
 
 ## Table containing required elements
 
+<table style="width:100%">
+  <tr>
+    <th>Tuples</th>
+    <th>Lists</th>
+    <th>List comprehension</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table>
