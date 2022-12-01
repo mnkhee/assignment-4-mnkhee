@@ -329,6 +329,10 @@ def validate_move(character: dict, direction: str) -> bool:
     :param character: a dictionary
     :param direction: a string
     :return: a boolean value depending on if the user's move is valid
+    >>> validate_move({'Y': 4}, 'North')
+    False
+    >>> validate_move({'Y': 4}, 'South')
+    True
     """
     if direction == 'North' and character['Y'] == 4:
         return False
