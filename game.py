@@ -731,6 +731,18 @@ def character_has_leveled(character: dict) -> bool:
     :precondition: character must be a dictionary
     :param character: a dictionary
     :return: a boolean value depending on if the character has leveled up
+    >>> character_has_leveled({'Name': 'PLACEHOLDER', 'XP': 501, 'Level': 1})
+     ▄█          ▄████████  ▄█    █▄     ▄████████  ▄█            ███    █▄     ▄███████▄
+    ███         ███    ███ ███    ███   ███    ███ ███            ███    ███   ███    ███
+    ███         ███    █▀  ███    ███   ███    █▀  ███            ███    ███   ███    ███
+    ███        ▄███▄▄▄     ███    ███  ▄███▄▄▄     ███            ███    ███   ███    ███
+    ███       ▀▀███▀▀▀     ███    ███ ▀▀███▀▀▀     ███            ███    ███ ▀█████████▀
+    ███         ███    █▄  ███    ███   ███    █▄  ███            ███    ███   ███
+    ███▌    ▄   ███    ███ ███    ███   ███    ███ ███▌    ▄      ███    ███   ███
+    █████▄▄██   ██████████  ▀██████▀    ██████████ █████▄▄██      ████████▀   ▄████▀
+    ▀                                              ▀
+    Great job PLACEHOLDER! You are one step away from Drakon.
+    True
     """
     if character['XP'] >= 500:
         print(' ▄█          ▄████████  ▄█    █▄     ▄████████  ▄█            ███    █▄     ▄███████▄ \n'
@@ -760,6 +772,10 @@ def execute_glow_up_protocol(character: dict) -> dict:
     :precondition: character must be a dictionary
     :param character: a dictionary
     :return: a dictionary containing character information with updates stats
+    >>> execute_glow_up_protocol({'Class': 'Samurai', 'Current_HP': 0, 'Max_HP': 0, 'Attack': 0, 'Defence': 0})
+    {'Class': 'Samurai', 'Current_HP': 56, 'Max_HP': 56, 'Attack': 35, 'Defence': 12}
+    >>> execute_glow_up_protocol({'Class': 'Sorcerer', 'Current_HP': 0, 'Max_HP': 0, 'Attack': 0, 'Defence': 0})
+    {'Class': 'Sorcerer', 'Current_HP': 48, 'Max_HP': 48, 'Attack': 40, 'Defence': 11}
     """
     if character['Class'] == 'Samurai':
         character['Current_HP'] += 56
