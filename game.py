@@ -497,6 +497,8 @@ def execute_boss(character: dict, enemy: dict) -> None:
     :param character: a dictionary
     :param enemy: a dictionary
     :return: None
+    >>> execute_boss({'Level': 3, 'X': 4, 'Y': 3, 'XP': 0, 'Current_HP': 540, 'Max_HP': 540, 'Attack': 156, 'Defence': 156, 'Class': 'Basic', 'Move_Set': {'Run': 0, 'Punch': 156}},{'Name': "Drakon", 'Current_HP': 256, 'Max_HP': 256, 'Attack': 82, 'Defence': 54})
+
     """
     print('''
 
@@ -709,6 +711,12 @@ def check_if_goal_attained(character: dict) -> bool:
     :precondition: character must be a dictionary
     :param character: character is a dictionary
     :return: a boolean value depending on if the boss is dead or not
+    >>> check_if_goal_attained({'Boss_Status': 'Dead'})
+    True
+    >>> check_if_goal_attained({'Boss_Status': 'Not Dead'})
+    False
+    >>> check_if_goal_attained({'Boss_Status': 'Chicken Noodle Soup'})
+    False
     """
     if character['Boss_Status'] == 'Dead':
         return True
