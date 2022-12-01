@@ -220,6 +220,14 @@ def describe_current_location(board: dict, character: dict) -> tuple:
     :param board: a dictionary
     :param character: a dictionary
     :return: a tuple containing the player's current coordinates
+    >>> describe_current_location({(2, 2): ['Entia Field']}, {'X': 2, 'Y': 2})
+    You are located at (2, 2) ['Entia Field']
+    A vast field connecting each part of Entia
+    (2, 2)
+    >>> describe_current_location({(4, 3): ['Entia Capital City']}, {'X': 4, 'Y': 3})
+    You are located at (4, 3) ['Entia Capital City']
+    The capital city of Entia, houses many shops to buy goods from.
+    (4, 3)
     """
     character_location = character['X'], character['Y']
     print(f'You are located at', character_location, board[character_location])
