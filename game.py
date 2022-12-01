@@ -18,6 +18,8 @@ def make_board(rows: int, columns: int) -> dict:
     :param rows: an integer
     :param columns: an integer
     :return: a board containing tuples as coordinates filled with location names
+    >>> make_board(5, 5)
+    {(0, 0): ['Stowry Village'], (0, 1): ['Margrove Pass'], (0, 2): ['Entia Field'], (0, 3): ['Entia Field'], (0, 4): ['Makna Harbour'], (1, 0): ['Margrove Pass'], (1, 1): ['Margrove Pass'], (1, 2): ['Entia Field'], (1, 3): ['Entia Field'], (1, 4): ['Entia Capital City'], (2, 0): ['Entia Field'], (2, 1): ['Entia Field'], (2, 2): ['Entia Field'], (2, 3): ['Satorl Forest'], (2, 4): ['Entia Field'], (3, 0): ['Entia Field'], (3, 1): ['Entia Field'], (3, 2): ['Entia Field'], (3, 3): ['Satorl Forest'], (3, 4): ['Entia Field'], (4, 0): ['Entia Field'], (4, 1): ['Entia Field'], (4, 2): ['Entia Field'], (4, 3): ["Drakon's Castle"], (4, 4): ['Entia Field']}
     """
     board = {}
 
