@@ -13,10 +13,12 @@ def make_board(rows: int, columns: int) -> dict:
     """
     creates and returns board containing coordinates filled with information
 
-    :precondition: rows must be an integer
-    :precondition: columns must be an integer
     :param rows: an integer
     :param columns: an integer
+    :precondition: rows must be an integer
+    :precondition: columns must be an integer
+    :postcondition: creates a board containing tuples as coordinates filled with location names
+    :postcondition: creates a board containing tuples as coordinates filled with location names
     :return: a board containing tuples as coordinates filled with location names
     >>> make_board(5, 5)
     {(0, 0): ['Stowry Village'], (0, 1): ['Margrove Pass'], (0, 2): ['Entia Field'], (0, 3): ['Entia Field'], (0, 4): ['Makna Harbour'], (1, 0): ['Margrove Pass'], (1, 1): ['Margrove Pass'], (1, 2): ['Entia Field'], (1, 3): ['Entia Field'], (1, 4): ['Entia Capital City'], (2, 0): ['Entia Field'], (2, 1): ['Entia Field'], (2, 2): ['Entia Field'], (2, 3): ['Satorl Forest'], (2, 4): ['Entia Field'], (3, 0): ['Entia Field'], (3, 1): ['Entia Field'], (3, 2): ['Entia Field'], (3, 3): ['Satorl Forest'], (3, 4): ['Entia Field'], (4, 0): ['Entia Field'], (4, 1): ['Entia Field'], (4, 2): ['Entia Field'], (4, 3): ["Drakon's Castle"], (4, 4): ['Entia Field']}
@@ -139,8 +141,9 @@ def player_stats(character: dict) -> dict:
     """
     sets stats for the character after choosing a subclass
 
-    :precondition: character must be a dictionary
     :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: inputs information about the character to the dictionary
     :return: a dictionary with character information
     >>> player_stats({'Class': 'Samurai'})
     {'Class': 'Samurai', 'Current_HP': 56, 'Max_HP': 56, 'Attack': 29, 'Defence': 12}
@@ -179,8 +182,9 @@ def player_move_set(character: dict) -> dict:
     """
     sets the players move set after choosing a subclass
 
-    :precondition: character must be a dictionary
     :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: inputs character move set into the dictionary
     :return: a dictionary containing character information
     >>> player_move_set({'Class': 'Basic', 'Attack': 34})
     {'Class': 'Basic', 'Attack': 34, 'Move_Set': {'Run': 0, 'Punch': 34}}
@@ -215,10 +219,12 @@ def describe_current_location(board: dict, character: dict) -> tuple:
     """
     describes to the user where they are on the board.
 
-    :precondition: board must be a dictionary
-    :precondition: character must be a dictionary
     :param board: a dictionary
     :param character: a dictionary
+    :precondition: board must be a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: checks where the player is in relation to the board
+    :postcondition: checks where the player is in relation to the board
     :return: a tuple containing the player's current coordinates
     >>> describe_current_location({(2, 2): ['Entia Field']}, {'X': 2, 'Y': 2})
     You are located at (2, 2) ['Entia Field']
@@ -288,10 +294,12 @@ def validate_move(character: dict, direction: str) -> bool:
     """
     validates the move of the character. checks if the move that they are doing is valid.
 
-    :precondition: character must be a dictionary
-    :precondition: direction must be a string
     :param character: a dictionary
     :param direction: a string
+    :precondition: character must be a dictionary
+    :precondition: direction must be a string
+    :postcondition: checks if the player's coordinates are out of bounds
+    :postcondition: checks if the direction is a valid direction
     :return: a boolean value depending on if the user's move is valid
     >>> validate_move({'Y': 4}, 'North')
     False
@@ -314,10 +322,12 @@ def move_character(character: dict, direction: str) -> None:
     """
     will move the character depending on their move
 
-    :precondition: character must be a dictionary
-    :precondition: direction must be a string
     :param character: character is a dictionary
     :param direction: direction is a string
+    :precondition: character must be a dictionary
+    :precondition: direction must be a string
+    :postcondition: change the player's coordinates depending on their move
+    :postcondition: checks the direction to see where to move the character
     :return: does not return anything
     >>> move_character({'Y': 1}, 'North')
 
@@ -338,8 +348,9 @@ def check_for_challenges(character: dict) -> bool:
     """
     checks if there is a challenge
 
-    :precondition: character must be a dictionary
     :param character: character is a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: checks if there is a challenge for the user
     :return: returns a boolean value depending on if there is a challenge for the user
     >>> check_for_challenges({'X': 1, 'Y': 0})
     True
@@ -366,8 +377,9 @@ def execute_challenge_protocol(character: dict) -> None:
     """
     will execute a challenge for the user depending on their level
 
-    :precondition: character must be a dictionary
     :param character: character is a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: execute a challenge for the user depending on their level
     :return: None
     """
     if character['Level'] == 1:
@@ -382,10 +394,12 @@ def execute_battle(character: dict, difficulty: str) -> None:
     """
     checks the user's level and scales the enemies damage. Then it initiates the battle sequence.
 
-    :precondition: character must be a dictionary
-    :precondition: difficulty must be a string
     :param character: character is a dictionary
     :param difficulty: difficulty is a string
+    :precondition: character must be a dictionary
+    :precondition: difficulty must be a string
+    :postcondition: scales the enemies damage accordingly
+    :postcondition: scales the enemies damage accordingly
     :return: None
     """
     enemy = choose_enemy(character)
@@ -439,8 +453,9 @@ def filtered_enemies(enemies: dict) -> bool:
     """
     checks if the enemies in the list is a 'varyan' or a 'guard'
 
-    :precondition: enemies must be a dictionary
     :param enemies: a dictionary
+    :precondition: enemies must be a dictionary
+    :postcondition: checks if the enemy in the list is of a specific type
     :return: boolean value depending on if the enemy type is True or False
     >>> filtered_enemies({'Name': 'varyan'})
     True
@@ -457,8 +472,9 @@ def choose_enemy(character: dict) -> dict | str:
     """
     choose the enemy for the user to fight
 
-    :precondition: character must be a dictionary
     :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: randomly select an enemy for the user to battle
     :return: returns a dictionary containing the enemy information or a string that leads to the dictionary name
     """
     varyan = {'Name': 'Varyan Warrior', 'Current_HP': 37, 'Max_HP': 37, 'Attack': 18, 'Defence': 17, 'XP_Gain': 177}
@@ -490,10 +506,12 @@ def execute_boss(character: dict, enemy: dict) -> None:
     """
     the final boss battle. the user must be level three for this function to initiate
 
-    :precondition: character must be a dictionary
-    :precondition: enemy must be a dictionary
     :param character: a dictionary
     :param enemy: a dictionary
+    :precondition: character must be a dictionary
+    :precondition: enemy must be a dictionary
+    :postcondition: will initiate the final boss battle
+    :postcondition: will initiate the final boss battle
     :return: None
     >>> execute_boss({'Level': 3, 'X': 4, 'Y': 3, 'XP': 0, 'Current_HP': 540, 'Max_HP': 540, 'Attack': 156, 'Defence': 156, 'Class': 'Basic', 'Move_Set': {'Run': 0, 'Punch': 156}},{'Name': "Drakon", 'Current_HP': 256, 'Max_HP': 256, 'Attack': 82, 'Defence': 54})
 
@@ -706,8 +724,9 @@ def check_if_goal_attained(character: dict) -> bool:
     """
     checks if the user has beaten the boss
 
-    :precondition: character must be a dictionary
     :param character: character is a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: will check if the user beat the boss
     :return: a boolean value depending on if the boss is dead or not
     >>> check_if_goal_attained({'Boss_Status': 'Dead'})
     True
@@ -726,8 +745,9 @@ def character_has_leveled(character: dict) -> bool:
     """
     checks if the character has leveled up
 
-    :precondition: character must be a dictionary
     :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: will let the player know that they leveled up
     :return: a boolean value depending on if the character has leveled up
     >>> character_has_leveled({'Name': 'PLACEHOLDER', 'XP': 501, 'Level': 1})
      ▄█          ▄████████  ▄█    █▄     ▄████████  ▄█            ███    █▄     ▄███████▄
@@ -767,8 +787,9 @@ def execute_glow_up_protocol(character: dict) -> dict:
     """
     updates the character stats once the character levels up
 
-    :precondition: character must be a dictionary
     :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: updates the characters stats once the player levels up
     :return: a dictionary containing character information with updates stats
     >>> execute_glow_up_protocol({'Class': 'Samurai', 'Current_HP': 0, 'Max_HP': 0, 'Attack': 0, 'Defence': 0})
     {'Class': 'Samurai', 'Current_HP': 56, 'Max_HP': 56, 'Attack': 35, 'Defence': 12}
