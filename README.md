@@ -21,18 +21,49 @@ Another tip, go back to (0, 0) to gain some health
 
 <table style="width:100%">
   <tr>
+    <th>Required element</th>
+    <td>Location</td>
+  </tr>
+  <tr>
     <th>Tuples</th>
+    <td> 30 - 39 <br> 253 </td>
+  </tr>
+  <tr>
     <th>Lists</th>
+    <td> 262 <br> 472 </td>
+  </tr>
+  <tr>
     <th>List comprehension</th>
+    <td> 472 </td>
   </tr>
   <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
+    <th>Selection</th>
+    <td> 69 <br> 84 <br> 93 <br> 123 <br> Too many </td>
   </tr>
   <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
+    <th>Repetition</th>
+    <td> 63 <br> 88 <br> 90 <br> 107 <br> ... </td>
   </tr>
+  <tr>
+    <th>Membership operator</th>
+    <td> 90 <br> 107 <br> 264 <br> ... </td>
+  </tr>
+  <tr>
+    <th>Range function</th>
+    <td> 90 <br> 107 <br> 264 <br> ... </td>
+  </tr>
+  <tr>
+    <th>Itertools module</th>
+    <td> 687 </td>
+  </tr>
+  <tr>
+    <th>Filter function</th>
+    <td> 473 </td>
+  </tr>
+  <tr>
+    <th>Random module</th>
+    <td> 188 <br> 648 <br> 358 <br> ... </td>
+  </tr>
+
+
 </table>
