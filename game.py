@@ -319,6 +319,10 @@ def move_character(character: dict, direction: str) -> None:
     :param character: character is a dictionary
     :param direction: direction is a string
     :return: does not return anything
+    >>> move_character({'Y': 1}, 'North')
+
+    >>> move_character({'X': 3}, 'East')
+
     """
     if direction == 'North':
         character['Y'] += 1
