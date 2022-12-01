@@ -466,6 +466,10 @@ def filtered_enemies(enemies: dict) -> bool:
     :precondition: enemies must be a dictionary
     :param enemies: a dictionary
     :return: boolean value depending on if the enemy type is True or False
+    >>> filtered_enemies({'Name': 'varyan'})
+    True
+    >>> filtered_enemies({'Name': 'hotdog'})
+    False
     """
     if enemies['Name'] != "varyan" and enemies['Name'] != "guard":
         return False
