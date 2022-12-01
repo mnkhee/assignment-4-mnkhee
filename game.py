@@ -228,6 +228,8 @@ def player_move_set(character: dict) -> dict:
     :precondition: character must be a dictionary
     :param character: a dictionary
     :return: a dictionary containing character information
+    >>> player_move_set({'Class': 'Basic', 'Attack': 34})
+    {'Class': 'Basic', 'Attack': 34, 'Move_Set': {'Run': 0, 'Punch': 34}}
     """
     special = random.randint(5, 16)
     character['Move_Set'] = {'Run': 0}
